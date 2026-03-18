@@ -1,0 +1,97 @@
+{
+    "layer": "top",
+    "position": "top",
+    "name": "bar",
+    "height": 32,
+    "width": 700,
+    "margin": "0 auto 5 auto",
+    "spacing": 7,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    
+    "modules-left": [
+        "custom/power",
+        "cpu",
+        "memory"
+    ],
+    
+    "modules-center": [
+        "clock"
+    ],
+    
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "battery",
+        "tray"
+    ],
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
+    "cpu": {
+        "format": "CPU {usage}%",
+        "interval": 2,
+        "tooltip": true
+    },
+
+    "memory": {
+        "format": "RAM {}%",
+        "interval": 2,
+        "tooltip": true
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "interval": 1
+    },
+
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "  Connected",
+        "format-disconnected": "⚠ Disconnected",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "on-click": "rofi -show network-menu || nm-connection-editor"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "🔇 Muted",
+        "format-icons": ["🔈", "🔉", "🔊"],
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "🎤 {volume}%",
+        "format-source-muted": "🎤 Muted",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-discharging": "{icon} {capacity}%",
+        "format-charging": "⚡ {capacity}%",
+        "format-full": " Full",
+        "format-icons": ["", "", "", "", ""],  // Make sure this line exists
+        "tooltip-format": "{timeTo} remaining",
+        "interval": 60,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        }
+    },
+    "tray": {
+        "spacing": 8,
+        "icon-size": 16,  // Add this
+        "show-passive": true  // Add this
+    }
+}
