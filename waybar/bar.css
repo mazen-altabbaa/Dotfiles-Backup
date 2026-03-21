@@ -6,30 +6,33 @@
     min-height: 0;
 }
 
+/* The bar window itself is fully transparent — no background, no border */
 window#waybar {
-    background-color: rgba(30, 30, 46, 0.6);
-    border-radius: 16px;
-    border: 2px solid rgba(137, 180, 250, 0.3);
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
     transition: none;
 }
 
 window#waybar.top {
-    background-color: rgba(30, 30, 46, 0.6);
+    background-color: transparent;
 }
 
-/* All modules styling */
+/* Each module is a solid, fully opaque pill — gaps between them are see-through */
 #custom-power,
 #cpu,
 #memory,
 #clock,
 #network,
 #pulseaudio,
+#pulseaudio.microphone,
 #battery,
 #tray {
-    background-color: rgba(49, 50, 68, 0.5);
+    background-color: rgba(30, 30, 46, 0.92);
     border-radius: 12px;
+    border: 1.5px solid rgba(137, 180, 250, 0.25);
     padding: 0 12px;
-    margin: 4px 2px;
+    margin: 4px 3px;
     color: #cdd6f4;
 }
 
@@ -41,20 +44,15 @@ window#waybar.top {
 #network:hover,
 #pulseaudio:hover,
 #battery:hover {
-    background-color: rgba(137, 180, 250, 0.3);
-    transition: all 0.3s ease;
+    background-color: rgba(49, 50, 68, 0.98);
+    border-color: rgba(137, 180, 250, 0.6);
+    transition: all 0.2s ease;
 }
 
-/* Special styling for microphone */
-#pulseaudio#microphone {
-    background-color: rgba(49, 50, 68, 0.5);
-    padding: 0 12px;
-}
-
-/* Tray styling */
+/* Tray is transparent between icons but still spaced correctly */
 #tray {
-    background-color: transparent;
-    padding: 0 5px;
+    background-color: rgba(30, 30, 46, 0.92);
+    padding: 0 8px;
 }
 
 #tray > .passive {
@@ -68,12 +66,59 @@ window#waybar.top {
 
 /* Tooltip styling */
 tooltip {
-    background: rgba(30, 30, 46, 0.9);
-    border: 2px solid rgba(137, 180, 250, 0.5);
+    background: rgba(30, 30, 46, 0.95);
+    border: 1.5px solid rgba(137, 180, 250, 0.5);
     border-radius: 8px;
 }
 
 tooltip label {
     color: #cdd6f4;
     padding: 4px 8px;
+}
+
+/* Battery styling with colors */
+#battery {
+    transition: all 0.2s ease;
+}
+
+#battery.charging {
+    color: #a6e3a1;  /* Green for charging */
+}
+
+#battery.warning {
+    color: #fab387;  /* Orange for warning (20-50%) */
+}
+
+#battery.critical {
+    color: #f38ba8;  /* Red for critical (<20%) */
+}
+
+/* Audio icons coloring */
+#pulseaudio {
+    transition: all 0.2s ease;
+}
+
+#pulseaudio.muted {
+    color: #f38ba8;  /* Red when muted */
+}
+
+/* Volume level colors */
+#pulseaudio.low {
+    color: #fab387;  /* Orange for low volume */
+}
+
+#pulseaudio.medium {
+    color: #f9e2af;  /* Yellow for medium volume */
+}
+
+#pulseaudio.high {
+    color: #a6e3a1;  /* Green for high volume */
+}
+
+#custom-power,
+#cpu,
+#memory,
+#clock,
+#network {
+    transition: all 0.2s ease;
 }
